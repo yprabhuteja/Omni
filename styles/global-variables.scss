@@ -1,0 +1,50 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@100;500&display=swap";
+
+$sm: 750px;
+
+$lg: 992px;
+
+$sectionHeight: 90vh;
+
+@mixin shadow {
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+$primary: #1e9cd7;
+$footer: #373737;
+
+$themes: (
+  light: (
+    primary: $primary,
+    paragraph: #7b7b7b,
+    background1: white,
+    background2: #c2ddf2,
+    heading: #373737,
+    boxBackground: white,
+    box2: white,
+    header: white,
+    navItem: #373737,
+    filter: none,
+  ),
+  dark: (
+    primary: $primary,
+    paragraph: #ffffff,
+    background2: #242526,
+    background1: #18191a,
+    heading: white,
+    boxBackground: #3a3b3c,
+    box2: #242526,
+    header: #3a3b3c,
+    navItem: white,
+    filter: invert(100%) sepia(55%) saturate(0%) hue-rotate(117deg)
+      brightness(108%) contrast(101%),
+  ),
+);
+
+@mixin theme-aware($key, $color) {
+  @each $theme-name, $theme-color in $themes {
+    .theme-#{$theme-name} & {
+      #{$key}: map-get(map-get($themes, $theme-name), $color);
+    }
+  }
+}
